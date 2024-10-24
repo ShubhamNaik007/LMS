@@ -70,4 +70,19 @@ public class LibraryServiceTest {
 
         assertEquals("Book is already borrowed",exception.getMessage());
     }
+
+    @Test
+    void returnBook_ExceptionTest(){
+        Book book = new Book("3","C++","Balguru swami");
+        service.addBook(book);
+
+        IllegalArgumentException exception = assertThrows(
+                IllegalArgumentException.class,
+                () ->{
+                    service.returnBook("3");
+                }
+        );
+
+        assertEquals("Book was not borrowed",exception.getMessage());
+    }
 }
