@@ -41,4 +41,16 @@ public class LibraryServiceTest {
         assertTrue(fetchBook.isPresent());
         assertTrue(fetchBook.get().isBorrowed());
     }
+
+    @Test
+    void returnBookToLibrary(){
+        Book book = new Book("3","C++","Balguru swami");
+        service.addBook(book);
+        service.borrowBook("3");
+        service.returnBook("3");
+
+        Optional<Book> fetchedBook = service.findBookByNumber("3");
+        assertTrue(fetchedBook.isPresent());
+        assertFalse(fetchedBook.get().isBorrowed());
+    }
 }

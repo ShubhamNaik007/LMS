@@ -32,4 +32,18 @@ public class LibraryService {
             throw new IllegalArgumentException("Book not found");
         }
     }
+
+    public void returnBook(String number){
+        Optional<Book> optionalBook = findBookByNumber(number);
+        if (optionalBook.isPresent()){
+            Book book = optionalBook.get();
+            if(book.isBorrowed()){
+                book.setBorrowed(false);
+            }else {
+                throw new IllegalArgumentException("Book was not borrowed");
+            }
+        }else {
+            throw new IllegalArgumentException("Book not found");
+        }
+    }
 }
