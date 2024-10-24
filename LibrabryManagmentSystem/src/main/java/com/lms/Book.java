@@ -6,7 +6,7 @@ public class Book {
     private String author;
     private boolean borrowed;
 
-    public Book(String number, String title, String author, boolean borrowed) {
+    public Book(String number, String title, String author) {
         this.number = number;
         this.title = title;
         this.author = author;
