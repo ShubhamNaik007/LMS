@@ -53,4 +53,21 @@ public class LibraryServiceTest {
         assertTrue(fetchedBook.isPresent());
         assertFalse(fetchedBook.get().isBorrowed());
     }
+
+
+    @Test
+    void borrowBook_ExceptionTest(){
+        Book book = new Book("3","C++","Balguru swami");
+        service.addBook(book);
+        service.borrowBook("3");
+
+        Exception exception = assertThrows(
+                IllegalArgumentException.class,
+                () -> {
+                    service.borrowBook("3");
+                }
+        );
+
+        assertEquals("Book is already borrowed",exception.getMessage());
+    }
 }
