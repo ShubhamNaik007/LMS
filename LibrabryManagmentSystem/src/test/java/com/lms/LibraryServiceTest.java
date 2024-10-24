@@ -29,4 +29,16 @@ public class LibraryServiceTest {
         assert(fetchBook.isPresent());
         assertEquals("Java Fundamentals",fetchBook.get().getTitle());
     }
+
+    @Test
+    void borrowBookFromLibrary(){
+        Book book = new Book("2","C programming","Ajay Mittal");
+
+        this.service.addBook(book);
+        this.service.borrowBook("2");
+
+        Optional<Book> fetchBook = service.findBookByNumber("2");
+        assertTrue(fetchBook.isPresent());
+        assertTrue(fetchBook.get().isBorrowed());
+    }
 }

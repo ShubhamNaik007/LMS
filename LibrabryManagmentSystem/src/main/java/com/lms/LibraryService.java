@@ -18,4 +18,18 @@ public class LibraryService {
     public Optional<Book> findBookByNumber(String number){
         return Optional.ofNullable(this.bookStorage.get(number));
     }
+
+    public void borrowBook(String number){
+        Optional<Book> optionalBook = findBookByNumber(number);
+        if(optionalBook.isPresent()){
+            Book book = optionalBook.get();
+            if(!book.isBorrowed()){
+                book.setBorrowed(true);
+            }else {
+                throw new IllegalArgumentException("Book is already borrowed");
+            }
+        }else {
+            throw new IllegalArgumentException("Book not found");
+        }
+    }
 }
